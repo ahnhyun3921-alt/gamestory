@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게임시드 (GameSeed) - 게임 제작자 매칭 플랫폼</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing" class="page active">
+        <div class="gnb">
+            <div class="logo" onclick="showPage('landing')">🎮 GameSeed</div>
+            <div class="gnb-right">
+                <a class="gnb-link" onclick="showPage('makers')">팀원 찾기</a>
+                <a class="gnb-link" onclick="showPage('dashboard')">대시보드</a>
+            </div>
+        </div>
+        
+        <div class="landing">
+            <div class="landing-content">
+                <h1>게임 제작자를 위한 매칭 플랫폼</h1>
+                <p>아이디어만 있다면 누구나 게임을 만들 수 있습니다</p>
+                
+                <button class="btn-primary" onclick="showPage('create')">
+                    프로젝트 시작하기
+                </button>
+                
+                <div class="search-section">
+                    <div class="search-row">
+                        <input type="text" class="search-input" placeholder="프로젝트 검색...">
+                        <select class="search-select">
+                            <option value="">모든 장르</option>
+                            <option value="rpg">RPG</option>
+                            <option value="action">액션</option>
+                            <option value="puzzle">퍼즐</option>
+                        </select>
+                        <button class="search-btn">검색</button>
+                    </div>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card" onclick="showProjectDetail(0)">
+                        <h3>픽셀 던전 RPG</h3>
+                        <div class="meta">🎮 RPG · 팀원 3/5</div>
+                        <div class="description">
+                            레트로 감성의 로그라이크 던전 탐험 게임. 매번 다르게 생성되는 던전을 탐험하며 아이템을 조합하고 전략적 전투를 펼치세요.
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">2D</span>
+                            <span class="tag">로그라이크</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" onclick="showProjectDetail(1)">
+                        <h3>우주 농장 시뮬레이션</h3>
+                        <div class="meta">🌾 시뮬레이션 · 팀원 2/4</div>
+                        <div class="description">
+                            우주 정거장에서 작물을 키우며 자원을 관리하는 힐링 게임.
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Godot</span>
+                            <span class="tag">캐주얼</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" onclick="showProjectDetail(2)">
+                        <h3>리듬 액션 게임</h3>
+                        <div class="meta">⚔️ 액션 · 팀원 4/6</div>
+                        <div class="description">
+                            음악 비트에 맞춰 적을 물리치는 리듬 액션 게임.
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Unreal</span>
+                            <span class="tag">3D</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Detail Page -->
+    <div id="detail" class="page detail-page">
+        <div class="gnb">
+            <div class="logo" onclick="showPage('landing')">🎮 GameSeed</div>
+            <div class="gnb-right">
+                <a class="gnb-link" onclick="showPage('makers')">팀원 찾기</a>
+                <a class="gnb-link" onclick="showPage('dashboard')">대시보드</a>
+            </div>
+        </div>
+        
+        <div class="detail-content">
+            <div class="detail-header">
+                <h1 id="detailTitle">픽셀 던전 RPG</h1>
+                <div class="meta" id="detailMeta">🎮 RPG · 팀원 3/5 · 모집중</div>
+                <button class="btn-submit" style="margin-top: 20px;" onclick="showApplicationModal()">
+                    지원하기
+                </button>
+            </div>
+            
+            <div class="detail-tabs">
+                <button class="tab-btn active" onclick="switchTab('overview')">개요</button>
+                <button class="tab-btn" onclick="switchTab('team')">팀 구성</button>
+                <button class="tab-btn" onclick="switchTab('comments')">댓글</button>
+            </div>
+            
+            <div id="tab-overview" class="detail-section">
+                <h3>프로젝트 소개</h3>
+                <p id="detailDescription">레트로 감성의 로그라이크 던전 탐험 게임입니다.</p>
+                
+                <h3 style="margin-top: 32px;">핵심 시스템</h3>
+                <p>• 절차적 던전 생성<br>• 아이템 조합 시스템<br>• 턴제 전략 전투</p>
+            </div>
+            
+            <div id="tab-team" class="detail-section" style="display: none;">
+                <h3>필요한 역할</h3>
+                <div class="role-card">개발자 (1명) - Unity/C# 경험자</div>
+                <div class="role-card">아티스트 (1명) - 픽셀 아트 가능자</div>
+            </div>
+            
+            <div id="tab-comments" class="detail-section" style="display: none;">
+                <h3>댓글</h3>
+                <div id="commentsList">
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author">김유저</span>
+                            <span class="comment-time">2시간 전</span>
+                        </div>
+                        <div class="comment-text">정말 재미있는 아이디어네요!</div>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 32px;">댓글 작성</h3>
+                <textarea class="comment-input" id="commentInput" placeholder="댓글을 입력하세요..."></textarea>
+                <button class="btn-submit" onclick="addComment()">댓글 등록</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Makers Page -->
+    <div id="makers" class="page makers-page">
+        <div class="gnb">
+            <div class="logo" onclick="showPage('landing')">🎮 GameSeed</div>
+        </div>
+        
+        <div class="makers-content">
+            <h1>팀원 찾기</h1>
+            
+            <div class="makers-grid">
+                <div class="maker-card">
+                    <h3>김개발</h3>
+                    <div class="maker-role">개발자</div>
+                    <div class="maker-bio">Unity와 C# 경험 5년</div>
+                    <div class="maker-skills">
+                        <span class="skill-tag">Unity</span>
+                        <span class="skill-tag">C#</span>
+                    </div>
+                </div>
+                
+                <div class="maker-card">
+                    <h3>이아트</h3>
+                    <div class="maker-role">아티스트</div>
+                    <div class="maker-bio">픽셀 아트 전문</div>
+                    <div class="maker-skills">
+                        <span class="skill-tag">픽셀 아트</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dashboard Page -->
+    <div id="dashboard" class="page dashboard-page">
+        <div class="gnb">
+            <div class="logo" onclick="showPage('landing')">🎮 GameSeed</div>
+        </div>
+        
+        <div class="dashboard-content">
+            <h1>대시보드</h1>
+            
+            <div class="dashboard-tabs">
+                <button class="tab-btn active" onclick="switchDashboardTab('profile')">내 프로필</button>
+                <button class="tab-btn" onclick="switchDashboardTab('applications')">지원 현황</button>
+            </div>
+            
+            <div id="dashboard-profile" class="profile-section">
+                <div class="profile-header">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-info">
+                        <h2>홍길동</h2>
+                        <p>게임 개발자 · Unity 전문</p>
+                    </div>
+                </div>
+                
+                <h3>자기소개</h3>
+                <p>5년차 게임 개발자입니다. Unity와 C#을 전문으로 합니다.</p>
+            </div>
+            
+            <div id="dashboard-applications" class="profile-section" style="display: none;">
+                <h3>지원 현황</h3>
+                <div class="application-card">
+                    <div class="application-header">
+                        <div>
+                            <div class="application-title">픽셀 던전 RPG</div>
+                            <div class="application-meta">개발자 포지션</div>
+                        </div>
+                        <span class="status-badge status-pending">대기중</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Create Project Page -->
+    <div id="create" class="page create-page">
+        <div class="gnb">
+            <div class="logo" onclick="showPage('landing')">🎮 GameSeed</div>
+        </div>
+        
+        <div class="create-content">
+            <h1>새 프로젝트 만들기</h1>
+            
+            <div class="section">
+                <h3>1. 장르 선택</h3>
+                <p>어떤 장르의 게임을 만드실 건가요?</p>
+                <select id="genreSelect" onchange="changeGenre()">
+                    <option value="">장르를 선택하세요...</option>
+                    <option value="rpg">🎮 RPG</option>
+                    <option value="visual-novel">📖 비주얼 노벨</option>
+                    <option value="puzzle">🧩 퍼즐/전략</option>
+                </select>
+            </div>
+            
+            <div id="formSection" class="section" style="display: none;">
+                <h3>2. 기획서 작성</h3>
+                
+                <div id="emptyState" class="empty-state">
+                    <div class="icon">👆</div>
+                    <h3>먼저 장르를 선택해주세요</h3>
+                </div>
+                
+                <div id="rpgTemplate" class="genre-template">
+                    <div class="template-header rpg">
+                        <div class="template-icon">🎮</div>
+                        <div>
+                            <div class="template-title" style="color: #667eea;">RPG GDD 템플릿</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>게임 제목</label>
+                        <div class="form-guide">💡 프로젝트의 매력을 담은 제목</div>
+                        <input type="text" placeholder="예: 픽셀 던전 RPG">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>한 줄 요약</label>
+                        <input type="text" placeholder="예: 레트로 감성의 로그라이크 던전 탐험 게임">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>핵심 컨셉</label>
+                        <textarea rows="4" placeholder="게임의 독특한 매력을 설명해주세요"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>전투 시스템</label>
+                        <textarea rows="5" placeholder="전투 방식을 설명해주세요"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>성장 시스템</label>
+                        <textarea rows="5" placeholder="캐릭터 성장 방식을 설명해주세요"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>세계관 및 스토리</label>
+                        <textarea rows="6" placeholder="게임의 배경과 스토리를 설명해주세요"></textarea>
+                    </div>
+                </div>
+                
+                <div id="visual-novelTemplate" class="genre-template">
+                    <div class="template-header visual-novel">
+                        <div class="template-icon">📖</div>
+                        <div>
+                            <div class="template-title" style="color: #f093fb;">비주얼 노벨 GDD 템플릿</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>게임 제목</label>
+                        <input type="text" placeholder="예: 벚꽃이 지던 날">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>시놉시스</label>
+                        <textarea rows="6" placeholder="전체 줄거리를 요약해주세요"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>등장인물</label>
+                        <textarea rows="6" placeholder="주요 캐릭터를 소개해주세요"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>분기 및 엔딩</label>
+                        <textarea rows="4" placeholder="엔딩 구조를 설명해주세요"></textarea>
+                    </div>
+                </div>
+                
+                <div id="puzzleTemplate" class="genre-template">
+                    <div class="template-header puzzle">
+                        <div class="template-icon">🧩</div>
+                        <div>
+                            <div class="template-title" style="color: #4facfe;">퍼즐/전략 GDD 템플릿</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>게임 제목</label>
+                        <input type="text" placeholder="예: 블록 매치 팩토리">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>핵심 게임플레이</label>
+                        <textarea rows="5" placeholder="플레이어가 무엇을 하는지 설명해주세요"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>퍼즐 메카닉</label>
+                        <textarea rows="5" placeholder="규칙과 전략을 설명해주세요"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>난이도 곡선</label>
+                        <textarea rows="5" placeholder="게임이 어떻게 어려워지는지 설명해주세요"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="buttonGroup" class="button-group" style="display: none;">
+                <button class="btn-secondary" onclick="showPage('landing')">취소</button>
+                <button class="btn-submit" onclick="submitProject()">게시하기</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Application Modal -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h3>프로젝트 지원하기</h3>
+            
+            <div class="form-group">
+                <label>지원 포지션</label>
+                <select id="applicationPosition">
+                    <option value="">포지션 선택</option>
+                    <option value="개발자">개발자</option>
+                    <option value="아티스트">아티스트</option>
+                    <option value="디자이너">디자이너</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>지원 메시지</label>
+                <textarea id="applicationMessage" rows="6" placeholder="자신의 경험을 작성해주세요"></textarea>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn-secondary" onclick="closeApplicationModal()">취소</button>
+                <button class="btn-submit" onclick="submitApplication()">지원하기</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page Navigation -->
+    <div class="page-nav">
+        <button class="nav-btn active" onclick="showPage('landing')">메인</button>
+        <button class="nav-btn" onclick="showPage('makers')">팀원</button>
+        <button class="nav-btn" onclick="showPage('create')">만들기</button>
+        <button class="nav-btn" onclick="showPage('dashboard')">대시보드</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
